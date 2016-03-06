@@ -112,21 +112,24 @@ angular.module("game-of-life")
             return neighbours;
         }
         function isCellAlive(x, y){
-            if (x < 0){
-                x = width-1;
+            var xToCheck = x;
+            var yToCheck = y;
+
+            if (xToCheck < 0){
+                xToCheck = width-1;
             }
-            if (x >= width){
-                x == 0;
+            if (xToCheck >= width){
+                xToCheck = 0;
             }
-            if (y < 0){
-                y = height-1;
+            if (yToCheck < 0){
+                yToCheck = height-1;
             }
-            if (y >= height){
-                y = 0;
+            if (yToCheck >= height){
+                yToCheck = 0;
             }
 
             try {
-                var alive = vm.grid[x][y].alive;
+                var alive = vm.grid[xToCheck][yToCheck].alive;
                 return alive;
             }
             catch (e){
