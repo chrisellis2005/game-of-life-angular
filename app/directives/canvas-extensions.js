@@ -1,4 +1,4 @@
-angular.module('game-of-life')
+angular.module('game-of-life'   )
     .directive('ngCX', function() {
         return function(scope, element, attrs) {
             scope.$watch(attrs.ngCX, function(value) {
