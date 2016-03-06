@@ -7,6 +7,7 @@ angular.module("game-of-life")
     vm.grid = [];
     vm.level = 0;
     vm.animate = false;
+    vm.randomBirthChance = 30;
 
     vm.getCells = function(){
         var cells = [];
@@ -153,7 +154,44 @@ angular.module("game-of-life")
             return "Stop Animation";
         }
         return "Start Animation";
-    }
+    };
+
+    vm.randomiseLevel = function(){
+        if (vm.level > 0){
+            return;
+        }
+
+        var newGrid = [];
+        vm.level = 0;
+        vm.animate = false;
+
+        function randomIsAlive(){
+            var bornChance =  Math.floor((Math.random() * 100) + 1);
+
+            if (bornChance >= 100 - vm.randomBirthChance){
+                return true;
+            }
+            return false;
+        }
+
+        for (var i=0; i < width; i++) {
+            var row = [];
+
+            for (var j = 0; j < height; j++) {
+                var currentCell = vm.grid[i][j];
+
+                var newCell = {
+                    x: currentCell.x,
+                    y: currentCell.y,
+                    alive: randomIsAlive()
+                }
+                row.push(newCell);
+            }
+            newGrid.push(row);
+        }
+        vm.grid = newGrid;
+
+    };
 
     vm.init();
 
