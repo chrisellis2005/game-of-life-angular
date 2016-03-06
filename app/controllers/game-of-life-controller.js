@@ -52,7 +52,7 @@ angular.module("game-of-life")
         if (cell.alive){
             return "fill:royalblue;"
         }
-        return "fill:darkgoldenrod;";
+        return "fill:peachpuff;";
     };
     vm.toggleAlive = function(cell){
         if (vm.level > 0){
