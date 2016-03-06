@@ -1,0 +1,22 @@
+<div>
+    <h1>Game of Life - {{vm.levelMessage()}}</h1>
+
+    <button ng-click="vm.nextLevel()" ng-show="!vm.isGameOver()" >Next</button>
+    <button ng-click="vm.init()" >Reset</button>
+    <button ng-click="vm.runAnimation()">{{vm.getAnimateButtonText()}}</button>
+    <hr/>
+</div>
+
+<div id="game-of-life-grid">
+
+    <svg width="1024" height="768">
+
+        <circle ng-repeat="cell in vm.getCells();"
+                cx="{{vm.getX(cell)}}" cy="{{vm.getY(cell)}}" r="4" style="{{vm.getStyle(cell)}}"
+                ng-click="vm.toggleAlive(cell)">
+        </circle>
+
+    </svg>
+
+</div>
+
