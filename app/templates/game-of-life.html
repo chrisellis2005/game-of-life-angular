@@ -16,7 +16,7 @@
     <svg width="1024" height="768">
 
         <circle ng-repeat="cell in vm.getCells();"
-                cx="{{vm.getX(cell)}}" cy="{{vm.getY(cell)}}" r="4" style="{{vm.getStyle(cell)}}"
+                ng-c-x="{{vm.getX(cell)}}" ng-c-y="{{vm.getY(cell)}}" r="4" style="{{vm.getStyle(cell)}}"
                 ng-click="vm.toggleAlive(cell)">
         </circle>
 

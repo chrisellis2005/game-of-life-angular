@@ -166,7 +166,7 @@ angular.module("game-of-life")
         vm.animate = !vm.animate;
 
         if (vm.animate === true) {
-            $timeout(runAnimation, 1000);
+            $timeout(runAnimation, 250);
         }
     }
     vm.getAnimateButtonText = function(){
