@@ -112,10 +112,27 @@ angular.module("game-of-life")
             return neighbours;
         }
         function isCellAlive(x, y){
-            if (vm.grid[x] && vm.grid[x][y]){
-                return vm.grid[x][y].alive;
+            if (x < 0){
+                x = width-1;
             }
-            return false;
+            if (x >= width){
+                x == 0;
+            }
+            if (y < 0){
+                y = height-1;
+            }
+            if (y >= height){
+                y = 0;
+            }
+
+            try {
+                var alive = vm.grid[x][y].alive;
+                return alive;
+            }
+            catch (e){
+                console.log(e);
+                return false;
+            }
         }
     };
     vm.isGameOver = function(){
