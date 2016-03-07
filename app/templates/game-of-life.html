@@ -11,16 +11,4 @@
     <hr/>
 </div>
 
-<div id="game-of-life-grid">
-
-    <svg width="1024" height="768">
-
-        <circle ng-repeat="cell in vm.getCells();"
-                ng-c-x="{{vm.getX(cell)}}" ng-c-y="{{vm.getY(cell)}}" r="4" style="{{vm.getStyle(cell)}}"
-                ng-click="vm.toggleAlive(cell)">
-        </circle>
-
-    </svg>
-
-</div>
-
+<game-of-life-view grid="vm.grid"></game-of-life-view>

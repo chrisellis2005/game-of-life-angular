@@ -9,15 +9,6 @@ angular.module("game-of-life")
     vm.animate = false;
     vm.randomBirthChance = 30;
 
-    vm.getCells = function(){
-        var cells = [];
-        for (var i=0; i < width; i++) {
-            for (var j = 0; j < height; j++) {
-                cells.push(vm.grid[i][j]);
-            }
-        }
-        return cells;
-    };
 
     vm.init = function(){
         vm.level = 0;
@@ -42,24 +33,6 @@ angular.module("game-of-life")
         vm.grid[1][1].alive = true;
     };
 
-    vm.getX = function(cell){
-        return (cell.x + 1) * 10;
-    };
-    vm.getY = function(cell){
-        return (cell.y+ 1) * 10;
-    };
-    vm.getStyle = function(cell){
-        if (cell.alive){
-            return "fill:royalblue;"
-        }
-        return "fill:peachpuff;";
-    };
-    vm.toggleAlive = function(cell){
-        if (vm.level > 0){
-            return;
-        }
-        cell.alive = !cell.alive;
-    };
     vm.nextLevel = function(){
         if (vm.isGameOver()){
             return;
