@@ -1,6 +1,6 @@
 angular.module("game-of-life")
     .controller("GameOfLifeController",
-    ["$timeout", "gridGenerator", function($timeout, gridGenerator){
+    ["$timeout", "gridGenerator", "levelEngine", function($timeout, gridGenerator, levelEngine){
     var vm = this;
     var width = vm.cellsWidth;
     var height = vm.cellsHeight;
@@ -105,14 +105,7 @@ angular.module("game-of-life")
         }
     };
     vm.isGameOver = function(){
-        for (var i=0; i < width; i++){
-            for(var j=0; j < height; j++){
-                if (vm.game.grid[i][j].alive){
-                    return false;
-                }
-            }
-        }
-        return true;
+        return levelEngine.isGameOver(vm.game.grid);
     };
 
     vm.levelMessage = function(){
