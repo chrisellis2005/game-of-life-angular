@@ -41,7 +41,7 @@ angular.module("game-of-life")
     vm.levelMessage = function(){
         var message = "Level: " + vm.game.level;
 
-        if (vm.game.level > 0 &&gi
+        if (vm.game.level > 0 &&
             vm.isGameOver()){
             message += " - Game Over";
         }
