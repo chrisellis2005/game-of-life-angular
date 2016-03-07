@@ -1,20 +1,23 @@
-<div id="game-of-life-header">
-    <game-title message="vm.levelMessage"></game-title>
+<div class="container-fluid">
+    <div id="game-of-life-header">
+        <game-title message="vm.levelMessage"></game-title>
 
-    <next-level-button next-level="vm.nextLevel" is-game-over="vm.isGameOver" ></next-level-button>
+        <!--<next-level-button next-level="vm.nextLevel" is-game-over="vm.isGameOver" ></next-level-button>-->
+
+
+        <random-level current-level="vm.game.level"
+                      birth-chance="vm.game.randomBirthChance"
+                      randomise-level="vm.randomiseLevel"></random-level>
+
+        <level-animation animate="vm.runAnimation"
+                         get-animation-text="vm.getAnimateButtonText"
+                         animation-delay="vm.game.animateDelay">
+        </level-animation>
+
+
+    </div>
+    <hr/>
+    <game-of-life-view grid="vm.game.grid"></game-of-life-view>
 
     <reset-button reset="vm.init"></reset-button>
-
-
-    <random-level current-level="vm.game.level"
-                  birth-chance="vm.game.randomBirthChance"
-                  randomise-level="vm.randomiseLevel"></random-level>
-
-    <level-animation animate="vm.runAnimation"
-                     get-animation-text="vm.getAnimateButtonText"
-                     animation-delay="vm.game.animateDelay">
-
-    </level-animation>
 </div>
-<hr/>
-<game-of-life-view grid="vm.game.grid"></game-of-life-view>
