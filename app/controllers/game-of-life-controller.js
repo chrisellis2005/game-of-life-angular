@@ -30,79 +30,9 @@ angular.module("game-of-life")
         if (vm.isGameOver()){
             return;
         }
-        var newGrid = [];
-        for (var i=0; i < width; i++) {
-            var row = [];
 
-            for (var j = 0; j < height; j++) {
-                var currentCell = vm.game.grid[i][j];
-
-                var newCell = {
-                    x: currentCell.x,
-                    y: currentCell.y,
-                    alive: isNewCellAlive(currentCell)
-                }
-                row.push(newCell);
-            }
-            newGrid.push(row);
-        }
-        vm.game.grid = newGrid;
+        vm.game.grid = levelEngine.createNextGrid(vm.game.grid);
         vm.game.level++;
-
-        function isNewCellAlive(cell){
-            var neighbourCount = getAliveNeighbours(cell.x, cell.y);
-
-            if (cell.alive === true &&
-                (neighbourCount == 2 ||
-                neighbourCount == 3))
-                return true;
-
-            if (cell.alive === false &&
-                neighbourCount == 3)
-                return true;
-
-            return false;
-        }
-        function getAliveNeighbours(x, y){
-            var neighbours = 0;
-
-            neighbours += isCellAlive(x-1, y-1); // NW
-            neighbours += isCellAlive(x, y-1); //N
-            neighbours += isCellAlive(x+1, y-1); //NE
-            neighbours += isCellAlive(x - 1, y); //E
-            neighbours += isCellAlive(x + 1, y); //W
-            neighbours += isCellAlive(x - 1, y + 1); //SW
-            neighbours += isCellAlive(x, y + 1); //S
-            neighbours += isCellAlive(x + 1, y + 1); //SE
-
-            return neighbours;
-        }
-        function isCellAlive(x, y){
-            var xToCheck = x;
-            var yToCheck = y;
-
-            if (xToCheck < 0){
-                xToCheck = width-1;
-            }
-            if (xToCheck >= width){
-                xToCheck = 0;
-            }
-            if (yToCheck < 0){
-                yToCheck = height-1;
-            }
-            if (yToCheck >= height){
-                yToCheck = 0;
-            }
-
-            try {
-                var alive = vm.game.grid[xToCheck][yToCheck].alive;
-                return alive;
-            }
-            catch (e){
-                console.log(e);
-                return false;
-            }
-        }
     };
     vm.isGameOver = function(){
         return levelEngine.isGameOver(vm.game.grid);
