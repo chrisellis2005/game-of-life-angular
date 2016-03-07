@@ -5,11 +5,10 @@
 
     <reset-button reset="vm.init"></reset-button>
     <level-animation animate="vm.runAnimation" get-animation-text="vm.getAnimateButtonText"></level-animation>
-    <button ng-click="vm.randomiseLevel()" ng-show="vm.game.level === 0">Randomise <Level></Level></button>
 
-    <label for="birth-chance" ng-show="vm.game.level === 0">Chance of Random Birth:</label>
-    <input id="birth-chance" ng-model="vm.game.randomBirthChance" ng-show="vm.game.level === 0" min="0" max="100" />
-    <hr/>
+    <random-level current-level="vm.game.level"
+                  birth-chance="vm.game.randomBirthChance"
+                  randomise-level="vm.randomiseLevel"></random-level>
 </div>
-
+<hr/>
 <game-of-life-view grid="vm.game.grid"></game-of-life-view>
