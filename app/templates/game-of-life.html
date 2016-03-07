@@ -4,7 +4,11 @@
     <next-level-button next-level="vm.nextLevel" is-game-over="vm.isGameOver" ></next-level-button>
 
     <reset-button reset="vm.init"></reset-button>
-    <level-animation animate="vm.runAnimation" get-animation-text="vm.getAnimateButtonText"></level-animation>
+    <level-animation animate="vm.runAnimation"
+                     get-animation-text="vm.getAnimateButtonText"
+                     animation-delay="vm.game.animateDelay">
+
+    </level-animation>
 
     <random-level current-level="vm.game.level"
                   birth-chance="vm.game.randomBirthChance"

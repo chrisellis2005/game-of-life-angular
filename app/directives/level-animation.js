@@ -2,11 +2,12 @@ angular.module("game-of-life")
     .directive("levelAnimation", function(){
         return {
             restrict: "E",
-            template: "<button ng-click=\"vm.animate()\">{{vm.getAnimationText()}}</button>" ,
+            templateUrl: "/app/templates/level-animation.html" ,
             controllerAs: "vm",
             scope: {
                 animate: "=",
-                getAnimationText: "="
+                getAnimationText: "=",
+                animationDelay: "="
             },
             controller: function(){},
             bindToController: true

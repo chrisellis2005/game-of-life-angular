@@ -12,7 +12,8 @@ angular.module("game-of-life")
             grid: gridGenerator.createEmptyGrid(width, height),
             level: 0,
             animate: false,
-            randomBirthChance: 30
+            randomBirthChance: 30,
+            animateDelay: 100
         };
     };
 
@@ -31,7 +32,13 @@ angular.module("game-of-life")
             return;
         }
 
-        vm.game.grid = levelEngine.createNextGrid(vm.game.grid);
+        var newGrid = levelEngine.createNextGrid(vm.game.grid);
+        for (var i=0; i < vm.game.grid.length; i++){
+            for (var j=0; j < vm.game.grid[0].length; j++){
+                vm.game.grid[i][j].alive = newGrid[i][j].alive;
+            }
+        }
+
         vm.game.level++;
     };
     vm.isGameOver = function(){
@@ -52,14 +59,14 @@ angular.module("game-of-life")
     function runAnimation(){
         if (vm.game.animate && !vm.isGameOver()){
             vm.nextLevel();
-            $timeout(runAnimation, 1000);
+            $timeout(runAnimation, vm.game.animateDelay);
         }
     }
     vm.runAnimation = function(){
         vm.game.animate = !vm.game.animate;
 
         if (vm.game.animate === true) {
-            $timeout(runAnimation, 250);
+            $timeout(runAnimation, vm.game.animateDelay);
         }
     }
     vm.getAnimateButtonText = function(){
