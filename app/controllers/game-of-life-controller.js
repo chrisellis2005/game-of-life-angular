@@ -5,8 +5,6 @@ angular.module("game-of-life")
     var width = vm.cellsWidth;
     var height = vm.cellsHeight;
 
-    vm.randomBirthChance = 30;
-
     vm.game = {};
 
     vm.init = function(){
