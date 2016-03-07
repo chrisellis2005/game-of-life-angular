@@ -1,7 +1,8 @@
 <div id="game-of-life-header">
-    <h1>Game of Life - {{vm.levelMessage()}}</h1>
+    <game-title message="vm.levelMessage"></game-title>
 
-    <button ng-click="vm.nextLevel()" ng-show="!vm.isGameOver()" >Next</button>
+    <next-level-button next-level="vm.nextLevel" is-game-over="vm.isGameOver" ></next-level-button>
+
     <button ng-click="vm.init()" >Reset</button>
     <button ng-click="vm.runAnimation()">{{vm.getAnimateButtonText()}}</button>
     <button ng-click="vm.randomiseLevel()" ng-show="vm.game.level === 0">Randomise <Level></Level></button>
