@@ -7,7 +7,7 @@
     <button ng-click="vm.randomiseLevel()" ng-show="vm.game.level === 0">Randomise <Level></Level></button>
 
     <label for="birth-chance" ng-show="vm.game.level === 0">Chance of Random Birth:</label>
-    <input id="birth-chance" ng-model="vm.randomBirthChance" ng-show="vm.game.level === 0" min="0" max="100" />
+    <input id="birth-chance" ng-model="vm.game.randomBirthChance" ng-show="vm.game.level === 0" min="0" max="100" />
     <hr/>
 </div>
 

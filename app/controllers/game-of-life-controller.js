@@ -1,6 +1,6 @@
 angular.module("game-of-life")
     .controller("GameOfLifeController",
-    ["$timeout", function($timeout){
+    ["$timeout", "gridGenerator", function($timeout, gridGenerator){
     var vm = this;
     var width = vm.cellsWidth;
     var height = vm.cellsHeight;
@@ -8,32 +8,22 @@ angular.module("game-of-life")
     vm.game = {};
 
     vm.init = function(){
-        function createEmptyGrid() {
-            var newGrid = [];
-            for (var i = 0; i < width; i++) {
-                var row = [];
-
-                for (var j = 0; j < height; j++) {
-
-                    var cell = {
-                        x: i,
-                        y: j,
-                        alive: false
-                    };
-
-                    row.push(cell);
-                }
-
-                newGrid.push(row);
-            }
-            return newGrid;
-        }
         vm.game = {
-            grid: createEmptyGrid(),
+            grid: gridGenerator.createEmptyGrid(width, height),
             level: 0,
             animate: false,
             randomBirthChance: 30
         };
+    };
+
+    vm.randomiseLevel = function(){
+        if (vm.game.level > 0){
+            return;
+        }
+
+        vm.game.level = 0;
+        vm.game.animate = false;
+        vm.game.grid = gridGenerator.createRandomGrid(width, height, vm.game.randomBirthChance);
     };
 
     vm.nextLevel = function(){
@@ -124,6 +114,7 @@ angular.module("game-of-life")
         }
         return true;
     };
+
     vm.levelMessage = function(){
         var message = "Level: " + vm.game.level;
 
@@ -132,6 +123,8 @@ angular.module("game-of-life")
         }
         return message;
     };
+
+
     function runAnimation(){
         if (vm.game.animate && !vm.isGameOver()){
             vm.nextLevel();
@@ -152,45 +145,7 @@ angular.module("game-of-life")
         return "Start Animation";
     };
 
-    vm.randomiseLevel = function(){
-        if (vm.game.level > 0){
-            return;
-        }
 
-        function randomIsAlive(){
-            var bornChance =  Math.floor((Math.random() * 100) + 1);
-
-            if (bornChance >= 100 - vm.game.randomBirthChance){
-                return true;
-            }
-            return false;
-        }
-
-        function createRandomLevel(){
-            var newGrid = [];
-            for (var i=0; i < width; i++) {
-                var row = [];
-
-                for (var j = 0; j < height; j++) {
-                    var currentCell = vm.game.grid[i][j];
-
-                    var newCell = {
-                        x: currentCell.x,
-                        y: currentCell.y,
-                        alive: randomIsAlive()
-                    }
-                    row.push(newCell);
-                }
-                newGrid.push(row);
-            }
-            return newGrid;
-        }
-
-        vm.game.level = 0;
-        vm.game.animate = false;
-        vm.game.grid = createRandomLevel();
-
-    };
 
     vm.init();
 
