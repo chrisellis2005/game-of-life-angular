@@ -4,7 +4,7 @@
     <next-level-button next-level="vm.nextLevel" is-game-over="vm.isGameOver" ></next-level-button>
 
     <reset-button reset="vm.init"></reset-button>
-    <button ng-click="vm.runAnimation()">{{vm.getAnimateButtonText()}}</button>
+    <level-animation animate="vm.runAnimation" get-animation-text="vm.getAnimateButtonText"></level-animation>
     <button ng-click="vm.randomiseLevel()" ng-show="vm.game.level === 0">Randomise <Level></Level></button>
 
     <label for="birth-chance" ng-show="vm.game.level === 0">Chance of Random Birth:</label>
