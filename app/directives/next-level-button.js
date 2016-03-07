@@ -2,7 +2,7 @@ angular.module("game-of-life")
     .directive("nextLevelButton", function(){
         return {
             restrict: "E",
-            template: "<button ng-click=\"vm.nextLevel()\" ng-show=\"!vm.isGameOver()\">Next</button>",
+            template: "<button class=\"btn btn-primary\" ng-click=\"vm.nextLevel()\" ng-show=\"!vm.isGameOver()\">Next</button>",
             controllerAs: "vm",
             scope: {
                 nextLevel: "=",

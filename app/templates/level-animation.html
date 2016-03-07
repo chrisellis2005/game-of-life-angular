@@ -1,5 +1,8 @@
-<div>
-    <button ng-click="vm.animate()">{{vm.getAnimationText()}}</button>
+<div >
     <label for="animateDelay">Animation Delay (ms):</label>
+
     <input id="animateDelay" ng-model="vm.animationDelay" min="100" />
+
+    <button class="btn btn-primary btn-sm" ng-click="vm.animate()">{{vm.getAnimationText()}}</button>
+
 </div>
