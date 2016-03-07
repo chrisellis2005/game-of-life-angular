@@ -4,11 +4,11 @@
     <button ng-click="vm.nextLevel()" ng-show="!vm.isGameOver()" >Next</button>
     <button ng-click="vm.init()" >Reset</button>
     <button ng-click="vm.runAnimation()">{{vm.getAnimateButtonText()}}</button>
-    <button ng-click="vm.randomiseLevel()" ng-show="vm.level === 0">Randomise <Level></Level></button>
+    <button ng-click="vm.randomiseLevel()" ng-show="vm.game.level === 0">Randomise <Level></Level></button>
 
-    <label for="birth-chance" ng-show="vm.level === 0">Chance of Random Birth:</label>
-    <input id="birth-chance" ng-model="vm.randomBirthChance" ng-show="vm.level === 0" min="0" max="100" />
+    <label for="birth-chance" ng-show="vm.game.level === 0">Chance of Random Birth:</label>
+    <input id="birth-chance" ng-model="vm.randomBirthChance" ng-show="vm.game.level === 0" min="0" max="100" />
     <hr/>
 </div>
 
-<game-of-life-view grid="vm.grid"></game-of-life-view>
+<game-of-life-view grid="vm.game.grid"></game-of-life-view>

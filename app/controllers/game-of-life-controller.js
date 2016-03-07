@@ -4,33 +4,38 @@ angular.module("game-of-life")
     var vm = this;
     var width = vm.cellsWidth;
     var height = vm.cellsHeight;
-    vm.grid = [];
-    vm.level = 0;
-    vm.animate = false;
+
     vm.randomBirthChance = 30;
 
+    vm.game = {};
 
     vm.init = function(){
-        vm.level = 0;
-        vm.animate = false;
-        vm.grid = [];
-        for (var i=0; i < width; i++){
-            var row = [];
+        function createEmptyGrid() {
+            var newGrid = [];
+            for (var i = 0; i < width; i++) {
+                var row = [];
 
-            for(var j=0; j < height; j++){
+                for (var j = 0; j < height; j++) {
 
-                var cell = {
-                    x: i,
-                    y: j,
-                    alive: false
-                };
+                    var cell = {
+                        x: i,
+                        y: j,
+                        alive: false
+                    };
 
-                row.push(cell);
+                    row.push(cell);
+                }
+
+                newGrid.push(row);
             }
-
-            vm.grid.push(row);
+            return newGrid;
         }
-        vm.grid[1][1].alive = true;
+        vm.game = {
+            grid: createEmptyGrid(),
+            level: 0,
+            animate: false,
+            randomBirthChance: 30
+        };
     };
 
     vm.nextLevel = function(){
@@ -42,7 +47,7 @@ angular.module("game-of-life")
             var row = [];
 
             for (var j = 0; j < height; j++) {
-                var currentCell = vm.grid[i][j];
+                var currentCell = vm.game.grid[i][j];
 
                 var newCell = {
                     x: currentCell.x,
@@ -53,8 +58,8 @@ angular.module("game-of-life")
             }
             newGrid.push(row);
         }
-        vm.grid = newGrid;
-        vm.level++;
+        vm.game.grid = newGrid;
+        vm.game.level++;
 
         function isNewCellAlive(cell){
             var neighbourCount = getAliveNeighbours(cell.x, cell.y);
@@ -102,7 +107,7 @@ angular.module("game-of-life")
             }
 
             try {
-                var alive = vm.grid[xToCheck][yToCheck].alive;
+                var alive = vm.game.grid[xToCheck][yToCheck].alive;
                 return alive;
             }
             catch (e){
@@ -114,7 +119,7 @@ angular.module("game-of-life")
     vm.isGameOver = function(){
         for (var i=0; i < width; i++){
             for(var j=0; j < height; j++){
-                if (vm.grid[i][j].alive){
+                if (vm.game.grid[i][j].alive){
                     return false;
                 }
             }
@@ -122,7 +127,7 @@ angular.module("game-of-life")
         return true;
     };
     vm.levelMessage = function(){
-        var message = "Level: " + vm.level;
+        var message = "Level: " + vm.game.level;
 
         if (vm.isGameOver()){
             message += " - Game Over";
@@ -130,59 +135,62 @@ angular.module("game-of-life")
         return message;
     };
     function runAnimation(){
-        if (vm.animate && !vm.isGameOver()){
+        if (vm.game.animate && !vm.isGameOver()){
             vm.nextLevel();
             $timeout(runAnimation, 1000);
         }
     }
     vm.runAnimation = function(){
-        vm.animate = !vm.animate;
+        vm.game.animate = !vm.game.animate;
 
-        if (vm.animate === true) {
+        if (vm.game.animate === true) {
             $timeout(runAnimation, 250);
         }
     }
     vm.getAnimateButtonText = function(){
-        if (vm.animate === true){
+        if (vm.game.animate === true){
             return "Stop Animation";
         }
         return "Start Animation";
     };
 
     vm.randomiseLevel = function(){
-        if (vm.level > 0){
+        if (vm.game.level > 0){
             return;
         }
-
-        var newGrid = [];
-        vm.level = 0;
-        vm.animate = false;
 
         function randomIsAlive(){
             var bornChance =  Math.floor((Math.random() * 100) + 1);
 
-            if (bornChance >= 100 - vm.randomBirthChance){
+            if (bornChance >= 100 - vm.game.randomBirthChance){
                 return true;
             }
             return false;
         }
 
-        for (var i=0; i < width; i++) {
-            var row = [];
+        function createRandomLevel(){
+            var newGrid = [];
+            for (var i=0; i < width; i++) {
+                var row = [];
 
-            for (var j = 0; j < height; j++) {
-                var currentCell = vm.grid[i][j];
+                for (var j = 0; j < height; j++) {
+                    var currentCell = vm.game.grid[i][j];
 
-                var newCell = {
-                    x: currentCell.x,
-                    y: currentCell.y,
-                    alive: randomIsAlive()
+                    var newCell = {
+                        x: currentCell.x,
+                        y: currentCell.y,
+                        alive: randomIsAlive()
+                    }
+                    row.push(newCell);
                 }
-                row.push(newCell);
+                newGrid.push(row);
             }
-            newGrid.push(row);
+            return newGrid;
         }
-        vm.grid = newGrid;
+
+        vm.game.level = 0;
+        vm.game.animate = false;
+        vm.game.grid = createRandomLevel();
 
     };
 
