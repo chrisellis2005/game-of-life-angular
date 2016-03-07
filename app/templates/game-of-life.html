@@ -4,15 +4,17 @@
     <next-level-button next-level="vm.nextLevel" is-game-over="vm.isGameOver" ></next-level-button>
 
     <reset-button reset="vm.init"></reset-button>
+
+
+    <random-level current-level="vm.game.level"
+                  birth-chance="vm.game.randomBirthChance"
+                  randomise-level="vm.randomiseLevel"></random-level>
+
     <level-animation animate="vm.runAnimation"
                      get-animation-text="vm.getAnimateButtonText"
                      animation-delay="vm.game.animateDelay">
 
     </level-animation>
-
-    <random-level current-level="vm.game.level"
-                  birth-chance="vm.game.randomBirthChance"
-                  randomise-level="vm.randomiseLevel"></random-level>
 </div>
 <hr/>
 <game-of-life-view grid="vm.game.grid"></game-of-life-view>
