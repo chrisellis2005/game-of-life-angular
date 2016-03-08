@@ -4,6 +4,10 @@
 
         <!--<next-level-button next-level="vm.nextLevel" is-game-over="vm.isGameOver" ></next-level-button>-->
 
+        <label>Grid Size:</label>
+        <input ng-model="vm.cellsWidth"/>
+        <input ng-model="vm.cellsHeight"/>
+        <reset-button reset="vm.init"></reset-button>
 
         <random-level current-level="vm.game.level"
                       birth-chance="vm.game.randomBirthChance"
@@ -18,6 +22,4 @@
     </div>
     <hr/>
     <game-of-life-view grid="vm.game.grid"></game-of-life-view>
-
-    <reset-button reset="vm.init"></reset-button>
 </div>

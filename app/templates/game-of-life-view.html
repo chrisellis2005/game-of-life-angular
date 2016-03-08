@@ -1,5 +1,5 @@
 <div id="game-of-life-grid">
-    <svg width="400" height="400">
+    <svg ng-width="vm.getWidth()" ng-height="vm.getHeight()">
 
         <circle ng-repeat="cell in vm.getCells();"
                 ng-c-x="{{vm.getX(cell)}}" ng-c-y="{{vm.getY(cell)}}" r="4" style="{{vm.getStyle(cell)}}"

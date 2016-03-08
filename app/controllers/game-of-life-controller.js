@@ -2,14 +2,12 @@ angular.module("game-of-life")
     .controller("GameOfLifeController",
     ["$timeout", "gridGenerator", "levelEngine", function($timeout, gridGenerator, levelEngine){
     var vm = this;
-    var width = vm.cellsWidth;
-    var height = vm.cellsHeight;
 
     vm.game = {};
 
     vm.init = function(){
         vm.game = {
-            grid: gridGenerator.createEmptyGrid(width, height),
+            grid: gridGenerator.createEmptyGrid(vm.cellsWidth, vm.cellsHeight),
             level: 0,
             animate: false,
             randomBirthChance: 30,
@@ -24,7 +22,7 @@ angular.module("game-of-life")
 
         vm.game.level = 0;
         vm.game.animate = false;
-        vm.game.grid = gridGenerator.createRandomGrid(width, height, vm.game.randomBirthChance);
+        vm.game.grid = gridGenerator.createRandomGrid(vm.cellsWidth, vm.cellsHeight, vm.game.randomBirthChance);
     };
 
     vm.nextLevel = function(){
