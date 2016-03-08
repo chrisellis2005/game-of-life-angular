@@ -1,23 +1,31 @@
+<game-of-life-menu current-menu="vm.currentMenu">
+
+</game-of-life-menu>
+
 <div class="container-fluid">
-    <div id="game-of-life-header">
-        <game-title message="vm.levelMessage"></game-title>
 
-        <!--<next-level-button next-level="vm.nextLevel" is-game-over="vm.isGameOver" ></next-level-button>-->
+    <div ng-show="vm.currentMenu === 'size'">
+        <label>Grid Size:</label>
+        <input ng-model="vm.cellsWidth"/>
+        <input ng-model="vm.cellsHeight"/>
+        <reset-button reset="vm.init"></reset-button>
+    </div>
 
-
-        <random-level current-level="vm.game.level"
-                      birth-chance="vm.game.randomBirthChance"
+    <div ng-show="vm.currentMenu === 'setup'">
+        <random-level birth-chance="vm.game.randomBirthChance"
                       randomise-level="vm.randomiseLevel"></random-level>
-
         <level-animation animate="vm.runAnimation"
                          get-animation-text="vm.getAnimateButtonText"
                          animation-delay="vm.game.animateDelay">
         </level-animation>
-
-
     </div>
-    <hr/>
-    <game-of-life-view grid="vm.game.grid"></game-of-life-view>
 
-    <reset-button reset="vm.init"></reset-button>
+    <div ng-show="vm.currentMenu === 'game'">
+        <button class="btn btn-sm"
+                ng-class="{'btn-success': !vm.game.animate, 'btn-danger': vm.game.animate}"
+                ng-click="vm.runAnimation()">{{vm.getAnimateButtonText()}}</button>
+    </div>
 </div>
+
+
+<game-of-life-view grid="vm.game.grid"></game-of-life-view>

@@ -13,7 +13,7 @@ angular.module("game-of-life")
                         }
                     }
                 }
-                
+
                 return cells;
             };
             vm.getX = function(cell){
@@ -33,5 +33,11 @@ angular.module("game-of-life")
                     return;
                 }
                 cell.alive = !cell.alive;
+            };
+            vm.getWidth = function(){
+                return (vm.grid.length * 10) + 50;
+            };
+            vm.getHeight = function(){
+                return (vm.grid[0].length * 10) + 50;
             };
         }]);

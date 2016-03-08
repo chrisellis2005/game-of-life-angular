@@ -12,4 +12,18 @@ angular.module('game-of-life'   )
                 element.attr('cy', value);
             });
         };
+    })
+    .directive('ngWidth', function() {
+        return function(scope, element, attrs) {
+            scope.$watch(attrs.ngWidth, function(value) {
+                element.attr('width', value);
+            });
+        };
+    })
+    .directive('ngHeight', function() {
+        return function(scope, element, attrs) {
+            scope.$watch(attrs.ngHeight, function(value) {
+                element.attr('height', value);
+            });
+        };
     });
