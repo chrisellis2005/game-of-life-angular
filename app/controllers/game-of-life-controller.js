@@ -4,6 +4,7 @@ angular.module("game-of-life")
     var vm = this;
 
     vm.game = {};
+    vm.currentMenu = "game";
 
     vm.init = function(){
         vm.game = {
@@ -16,10 +17,6 @@ angular.module("game-of-life")
     };
 
     vm.randomiseLevel = function(){
-        if (vm.game.level > 0){
-            return;
-        }
-
         vm.game.level = 0;
         vm.game.animate = false;
         vm.game.grid = gridGenerator.createRandomGrid(vm.cellsWidth, vm.cellsHeight, vm.game.randomBirthChance);

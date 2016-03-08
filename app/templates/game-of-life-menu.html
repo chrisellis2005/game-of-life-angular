@@ -1,0 +1,22 @@
+<nav class="navbar  navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Game of Life</a>
+
+    <ul class="nav navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#"
+               ng-click="vm.currentMenu = 'game'"
+               ng-class="{active: vm.currentMenu === 'game'}">Game <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"
+               ng-click="vm.currentMenu = 'size'"
+               ng-class="{active: vm.currentMenu === 'size'}">Size</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"
+               ng-click="vm.currentMenu = 'setup'"
+               ng-class="{active: vm.currentMenu === 'setup'}">Setup</a>
+        </li>
+    </ul>
+
+</nav>
