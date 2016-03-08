@@ -16,7 +16,6 @@ angular.module('game-of-life'   )
     .directive('ngWidth', function() {
         return function(scope, element, attrs) {
             scope.$watch(attrs.ngWidth, function(value) {
-                console.log(value);
                 element.attr('width', value);
             });
         };
